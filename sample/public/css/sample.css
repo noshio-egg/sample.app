@@ -1,0 +1,40 @@
+.main {
+	padding: 50px 0;
+}
+
+.invisible {
+	visibility: hidden;
+	opacity: 0;
+	transition: .5s;
+	-webkit-transition: .5s;
+}
+
+.visible {
+	visibility: visible;
+	opacity: 1;
+	transition: .5s;
+	-webkit-transition: .5s;
+}
+
+#user-row:hover {
+	cursor: pointer;
+	background-color: lemonchiffon;
+}
+
+.edit-area {
+	margin: 3rem auto;
+}
+
+.message-area {
+	padding: .5rem;
+	margin: 2rem 0;
+}
+
+.message-area h3 {
+	text-align: center;
+}
+
+.page-links ul {
+	width: fit-content;
+	margin: 2rem auto;
+}

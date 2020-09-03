@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.def-nav-inline {
+	margin-left: 12.5%;
+}
+
+.def-nav-inline ul {
+	margin-bottom: 1rem;
+}
+ul .list-group-item {
+	background-color: rgb(0,0,0,0);
+}
+
+.specific-link h5 {
+	border-left: solid 0.4rem #3490dc;
+	padding-left: .4rem;
+}
+
+.detail-top {
+	width: 100%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 1.25rem;
+	padding-bottom: 2rem;
+}
+
+.cross-chart-area {
+	padding-top: 3rem;
+	border-top: solid 0.1rem darkgray;
+}
+
+.cross-chart {
+	padding-bottom: 2rem;
+	margin-bottom: 2rem;
+	border-bottom: solid 0.1rem darkgray;
+}

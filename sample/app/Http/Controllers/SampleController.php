@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Message;
+use App\MessageType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Exception;
-use App\Message;
-use App\MessageType;
 
 class SampleController extends Controller
 {

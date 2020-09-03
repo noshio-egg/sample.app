@@ -21,3 +21,7 @@ Route::post('/insert', 'SampleController@insert');
 Route::post('/update', 'SampleController@update');
 
 Route::post('/delete', 'SampleController@delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -17,6 +17,40 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+	'register' => true
+]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * ユーザロール
+ */
+Route::group([
+	'middleware' => [
+		'auth',
+		'can:user'
+	]
+], function () {
+	Route::get('/home', 'HomeController@index')->name('home');
+});
+
+/**
+ * 管理者ロール
+ */
+Route::group([
+	'middleware' => [
+		'auth',
+		'can:admin'
+	]
+], function () {
+});
+
+/**
+ * 開発者ロール
+ * 緊急メンテや運用で使用するコントローラ等を設定する。
+ */
+Route::group([
+	'middleware' => [
+		'auth',
+		'can:developer'
+	]
+], function () {});

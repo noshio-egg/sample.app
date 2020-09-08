@@ -17,8 +17,10 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+// Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+
 Auth::routes([
-	'register' => true
+	'register' => false
 ]);
 
 /**
@@ -42,6 +44,15 @@ Route::group([
 		'can:admin'
 	]
 ], function () {
+	/**
+	 * アンケート内容取得
+	 */
+	Route::get('/sheet/def', 'SheetController@definition')->name('def');
+
+	/**
+	 * アンケート回答取得
+	 */
+	Route::get('/sheet/data', 'SheetController@data')->name('data');
 });
 
 /**

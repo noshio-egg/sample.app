@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Model\Sheet;
 use App\Model\SheetDef;
 use App\Model\SheetDefAttr;
+use App\Service\SheetDataService;
 use App\Service\SheetDefinitionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,13 +13,17 @@ use Illuminate\Support\Facades\Log;
 use DateTime;
 use Exception;
 
+/**
+ * アンケート定義コントローラ
+ *
+ * @author noshio
+ *
+ */
 class SheetController extends Controller
 {
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
+	 * コンストラクタ
 	 */
 	public function __construct()
 	{
@@ -25,7 +31,47 @@ class SheetController extends Controller
 	}
 
 	/**
+	 * アンケート定義一覧ページへ遷移する
+	 */
+	public function sheets()
+	{
+		$sheets = Sheet::all()->where('enabled', 1);
+		return view('sheet.list')->with([
+			'sheets' => $sheets
+		]);
+	}
+
+	/**
+	 * 回答一覧ページへ遷移する
+	 *
+	 * @param Request $request
+	 */
+	public function answers(Request $request)
+	{
+		/**
+		 * パラメータチェック
+		 */
+		$sheet_id = $request->input('sheet_id');
+		if (empty($sheet_id)) {
+			return view('home')->with('error', 'sheet_idが未指定のためアンケート内容取得処理を中断しました。');
+		}
+
+		$sheet_datas = DB::table('sheet_datas')->orderBy('data_id', 'desc')->get();
+
+		$service = new SheetDataService($sheet_id);
+		$titles = $service->getTitleArray();
+		$records = $service->getAnswerList($sheet_datas);
+
+		return view('sheet.answerlist')->with([
+			'titles' => $titles,
+			'records' => $records
+		]);
+	}
+
+	/**
 	 * アンケート内容をGoogleFromより取得してデータベースに反映する
+	 *
+	 * @param Request $request
 	 */
 	public function definition(Request $request)
 	{
@@ -179,6 +225,8 @@ class SheetController extends Controller
 
 	/**
 	 * 回答データ取得->データベース反映（sheet_datas テーブル）
+	 *
+	 * @param Request $request
 	 */
 	public function data(Request $request)
 	{

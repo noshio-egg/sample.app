@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-	return view('welcome');
+	return redirect()->to('/home');
 });
 
 // Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
@@ -32,7 +32,15 @@ Route::group([
 		'can:user'
 	]
 ], function () {
+	/**
+	 * ホーム
+	 */
 	Route::get('/home', 'HomeController@index')->name('home');
+
+	/**
+	 * アンケート定義一覧
+	 */
+	Route::get('/sheet/list', 'SheetController@sheets')->name('sheets');
 });
 
 /**
@@ -53,6 +61,11 @@ Route::group([
 	 * アンケート回答取得
 	 */
 	Route::get('/sheet/data', 'SheetController@data')->name('data');
+
+	/**
+	 * アンケート回答一覧表示
+	 */
+	Route::get('/sheet/answer/list', 'SheetController@answers')->name('answerlist');
 });
 
 /**

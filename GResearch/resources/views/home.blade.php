@@ -38,12 +38,12 @@
         </div>
         @endcan
         <div class="col-md-6">
-            <a href="">
+            <a href="sheet/list">
                 <div class="main-menu btn btn-primary shadow"><h3>分析</h3></div>
             </a>
         </div>
         <div class="col-md-6">
-            <a href="">
+            <a href="sheet/list">
                 <div class="main-menu btn btn-primary shadow"><h3>回答内容確認</h3></div>
             </a>
         </div>
